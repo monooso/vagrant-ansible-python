@@ -614,5 +614,5 @@ postgresql_dev_headers: no
 
 # Development database and user details:
 postgresql_db_name: myapp
-postgresql_db_user: django
-postgresql_db_password: djangopassword
+postgresql_db_user: myapp_dba
+postgresql_db_password: mysecretpassword
