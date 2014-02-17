@@ -1,0 +1,21 @@
+---
+- name: Create development database
+  sudo_user: postgres
+  sudo: yes
+  postgresql_db: name={{ postgresql_db_name }}
+
+- name: Assign user to database
+  sudo_user: postgres
+  sudo: yes
+  postgresql_user: db={{ postgresql_db_name }} name={{ postgresql_db_user }} password={{ postgresql_db_password }} priv=ALL
+
+- name: Ensure user only has the required privileges
+  sudo_user: postgres
+  sudo: yes
+  postgresql_user: name={{ postgresql_db_user }} role_attr_flags=NOSUPERUSER,NOCREATEDB
+
+- name: Add PostGIS extension to development database
+  sudo_user: postgres
+  sudo: yes
+  shell: "/usr/bin/psql -d {{ postgresql_db_name }} -c \"CREATE EXTENSION IF NOT EXISTS postgis;\""
+  notify: restart postgresql

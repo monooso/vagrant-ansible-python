@@ -1,0 +1,31 @@
+---
+- name: Update APT cache
+  sudo: yes
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Upgrade APT
+  sudo: yes
+  apt: upgrade=yes
+
+- name: Prerequisites for provisioning (general)
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - build-essential
+    - python-setuptools
+    - python-dev
+    - git
+    - curl
+    - zip
+    - wget
+
+- name: Prerequisites for provisioning (pip)
+  sudo: yes
+  easy_install:
+    name: pip
+
+- name: Install basic pip packages
+  pip: name={{ item }}
+  with_items:
+    - tox
+    - sphinx

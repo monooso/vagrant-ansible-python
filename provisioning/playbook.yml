@@ -1,0 +1,24 @@
+---
+- hosts: all
+  sudo: yes
+  roles:
+    - common
+    - role: nginx
+      nginx_sites:
+        - server:
+            file_name: vagrant_ansible
+            listen: 80
+            server_name: localhost
+            root: "/vagrant/public"
+    - role: postgresql
+      postgresql_dev_headers: yes
+      postgresql_psycopg2: yes
+      postgresql_postgis: yes
+
+  tasks:
+    - name: Install virtualenv and virtualenvwrapper via pip
+      pip: name={{ item }}
+      with_items:
+        - virtualenv
+        - virtualenvwrapper
+
