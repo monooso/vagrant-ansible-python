@@ -19,3 +19,9 @@
   sudo: yes
   shell: "/usr/bin/psql -d {{ postgresql_db_name }} -c \"CREATE EXTENSION IF NOT EXISTS postgis;\""
   notify: restart postgresql
+
+- name: Add PostGIS Topology extension to development database
+  sudo_user: postgres
+  sudo: yes
+  shell: "/usr/bin/psql -d {{ postgresql_db_name }} -c \"CREATE EXTENSION IF NOT EXISTS postgis_topology;\""
+  notify: restart postgresql
