@@ -1,0 +1,12 @@
+---
+- name: Install virtualenv and virtualenvwrapper via pip
+  pip: name={{ item }}
+  with_items:
+    - virtualenv
+    - virtualenvwrapper
+
+- name: Create the virtualenvwrapper shell startup file
+  copy:
+    src: virtualenv.sh
+    dest: /home/vagrant/.bashrc.d/virtualenv.sh
+    force: yes
