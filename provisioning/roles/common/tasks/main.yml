@@ -7,7 +7,7 @@
   sudo: yes
   apt: upgrade=yes
 
-- name: Prerequisites for provisioning (general)
+- name: Install basic packages
   sudo: yes
   apt: pkg={{ item }} state=latest
   with_items:
@@ -18,8 +18,9 @@
     - curl
     - zip
     - wget
+    - libjpeg-dev
 
-- name: Prerequisites for provisioning (pip)
+- name: Install pip
   sudo: yes
   easy_install:
     name: pip

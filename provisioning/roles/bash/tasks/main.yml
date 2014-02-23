@@ -1,0 +1,16 @@
+---
+- name: Create the .bashrc.d directory
+  file:
+    path: /home/vagrant/.bashrc.d
+    state: directory
+
+- name: Create an empty file in the .bashrc.d directory
+  copy:
+    content: 'Place your .bashrc scripts in here'
+    dest: /home/vagrant/.bashrc.d/README
+
+- name: Create the .bashrc file
+  copy:
+    src: bashrc
+    dest: /home/vagrant/.bashrc
+    force: yes
